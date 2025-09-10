@@ -72,7 +72,7 @@ struct Square
 };
 
 void Vhod(Curcle a, Dot b){
-    if(sqrt((a.point.x-b.x)*(a.point.x-b.x)+(a.point.y-b.y)*(a.point.y-b.y))<a.rad){
+    if(((a.point.x-b.x)*(a.point.x-b.x)+(a.point.y-b.y)*(a.point.y-b.y))<a.rad*a.rad){
         cout << "Dot in curcle";
     } else{
         cout << "Dot not in curcle";
@@ -80,7 +80,7 @@ void Vhod(Curcle a, Dot b){
 }
 
 void Vhod(Square a, Dot b){
-    if(a.point.x<b.x and a.point.y<b.y and a.point.x+a.len>b.x and a.point.y+a.len>b.y){
+    if(a.point.x<b.x && a.point.y<b.y && a.point.x+a.len>b.x && a.point.y+a.len>b.y){
         cout << "Dot in square";
     } else{
         cout << "Dot not in square";
@@ -88,21 +88,20 @@ void Vhod(Square a, Dot b){
 }
 
 void OnLine(Curcle a, Dot b){
-    if(sqrt((a.point.x-b.x)*(a.point.x-b.x)+(a.point.y-b.y)*(a.point.y-b.y))==a.rad){
-        cout << "Dot in curcle";
+    if(((a.point.x-b.x)*(a.point.x-b.x)+(a.point.y-b.y)*(a.point.y-b.y))==a.rad*a.rad){
+        cout << "Dot on line curcle";
     } else{
-        cout << "Dot not in curcle";
+        cout << "Dot not on line curcle";
     }
 }
 
 void OnLine(Square a, Dot b){
-    if((a.point.x == b.x and a.point.y+a.len >= b.y and a.point.y <= b.y) or (a.point.x+a.len == b.x and a.point.y+a.len >= b.y and a.point.y <= b.y) or (a.point.y == b.y and a.point.x+a.len >= b.x and a.point.x <= b.x) or (a.point.y+a.len == b.y and a.point.x+a.len >= b.x and a.point.x <= b.x)){
-        cout << "Dot in square";
+    if((a.point.x == b.x && a.point.y+a.len >= b.y && a.point.y <= b.y) || (a.point.x+a.len == b.x && a.point.y+a.len >= b.y && a.point.y <= b.y) || (a.point.y == b.y && a.point.x+a.len >= b.x && a.point.x <= b.x) || (a.point.y+a.len == b.y && a.point.x+a.len >= b.x && a.point.x <= b.x)){
+        cout << "Dot on line square";
     } else{
         cout << 111;
         cout << a.point.x << " " << a.point.x+a.len << " " << a.point.y << " " << a.point.y+a.len << " " << b.x << " " << b.y;
-        cout << "Dot not in square" << endl;
-        
+        cout << "Dot not on line square" << endl;  
     }
 }
 
@@ -111,5 +110,5 @@ int main(){
     a.giveCord();
     Square b(2,3,5);
     b.giveCordLen();
-    Vhod(b, a);
+    OnLine(b, a);
 }
