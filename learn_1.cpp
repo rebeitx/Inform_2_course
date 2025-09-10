@@ -1,18 +1,20 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
-struct dot
+
+struct Dot
 {
-    int x;
-    int y;
-    dot(){
+    double x;
+    double y;
+    Dot(){
         this->x = 0;
         this->y = 0;
     }
-    dot(int x, int y){
+    Dot(double x, double y){
         this->x = x;
         this->y = y;
     }
-    void setCord(int x, int y){
+    void setCord(double x, double y){
         this->x = x;
         this->y = y;
     }
@@ -21,57 +23,93 @@ struct dot
     }
 };
 
-struct curcle
+struct Curcle
 {
-    dot a;
-    int r;
-    curcle(){
-        this->a.setCord(0, 0);
-        this->r = 0;
+    Dot point;
+    double rad;
+    Curcle(){
+        this->point.setCord(0, 0);
+        this->rad = 0;
     }
-    curcle(int x, int y, int r){
-        this->a.setCord(x, y);
-        this->r = r;
+    Curcle(double x, double y, double r){
+        this->point.setCord(x, y);
+        this->rad = r;
     }
-    void setCord(int x, int y){
-        this->a.setCord(x,y);
+    void setCord(double x, double y){
+        this->point.setCord(x,y);
     }
-    void setRad(int r){
-        this->r = r;
+    void setRad(double r){
+        this->rad = r;
     }
     void giveCordRad(){
-        this->a.giveCord();
-        cout << " " << this->r << endl;
+        this->point.giveCord();
+        cout << " " << this->rad << endl;
     }
 };
 
-struct square
+struct Square
 {
-    dot a;
-    int r;
-    square(){
-        this->a.setCord(0, 0);
-        this->r = 0;
+    Dot point;
+    double len;
+    Square(){
+        this->point.setCord(0, 0);
+        this->len = 0;
     }
-    square(int x, int y, int r){
-        this->a.setCord(x, y);
-        this->r = r;
+    Square(double x, double y, double r){
+        this->point.setCord(x, y);
+        this->len = r;
     }
-    void setCord(int x, int y){
-        this->a.setCord(x,y);
+    void setCord(double x, double y){
+        this->point.setCord(x,y);
     }
-    void setLen(int r){
-        this->r = r;
+    void setLen(double r){
+        this->len = r;
     }
     void giveCordLen(){
-        this->a.giveCord();
-        cout << " " << this->r << endl;
+        this->point.giveCord();
+        cout << this->len << endl;
     }
 };
 
+void Vhod(Curcle a, Dot b){
+    if(sqrt((a.point.x-b.x)*(a.point.x-b.x)+(a.point.y-b.y)*(a.point.y-b.y))<a.rad){
+        cout << "Dot in curcle";
+    } else{
+        cout << "Dot not in curcle";
+    }
+}
+
+void Vhod(Square a, Dot b){
+    if(a.point.x<b.x and a.point.y<b.y and a.point.x+a.len>b.x and a.point.y+a.len>b.y){
+        cout << "Dot in square";
+    } else{
+        cout << "Dot not in square";
+    }
+}
+
+void OnLine(Curcle a, Dot b){
+    if(sqrt((a.point.x-b.x)*(a.point.x-b.x)+(a.point.y-b.y)*(a.point.y-b.y))==a.rad){
+        cout << "Dot in curcle";
+    } else{
+        cout << "Dot not in curcle";
+    }
+}
+
+void OnLine(Square a, Dot b){
+    if((a.point.x == b.x and a.point.y+a.len >= b.y and a.point.y <= b.y) or (a.point.x+a.len == b.x and a.point.y+a.len >= b.y and a.point.y <= b.y) or (a.point.y == b.y and a.point.x+a.len >= b.x and a.point.x <= b.x) or (a.point.y+a.len == b.y and a.point.x+a.len >= b.x and a.point.x <= b.x)){
+        cout << "Dot in square";
+    } else{
+        cout << 111;
+        cout << a.point.x << " " << a.point.x+a.len << " " << a.point.y << " " << a.point.y+a.len << " " << b.x << " " << b.y;
+        cout << "Dot not in square" << endl;
+        
+    }
+}
+
 int main(){
-    dot a(2,3);
+    Dot a(2,3);
     a.giveCord();
-    square b(2,3,5);
+    Square b(2,3,5);
     b.giveCordLen();
+    Vhod(b, a);
 }
